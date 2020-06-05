@@ -1,5 +1,6 @@
 import unittest
 from lecture3_pdf import *
+from lecture3_employee_payslip import *
 import os
 
 dir = 'UnitTest/lecture3'
@@ -52,6 +53,31 @@ class TestString(unittest.TestCase):
 
     def test_encrypted_pdf(self):
         encryptPDF(f'{dir}/myPDF.pdf', '12345')
+
+    def test_employee_payslip(self):
+        employee_data = [
+            {
+                'id': 111,
+                'name': 'Chongwoon Cho',
+                'payment': 20000,
+                'tax': 3000,
+                'total': 17000,
+                'birth': '970924'
+            },
+
+            {
+                'id': 115,
+                'name': 'Dongwon Gang',
+                'payment': 50000,
+                'tax': 7000,
+                'total': 43000,
+                'birth': '840212'
+            }
+        ]
+
+        for emp in employee_data:
+            filePath = generate_payslip(emp)
+            encryptPDF(filePath, emp['birth'])
 
 if __name__ == '__main__':
     unittest.main()
